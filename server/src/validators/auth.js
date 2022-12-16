@@ -14,6 +14,14 @@ const username = check('username')
 .isLength({min:6,max:15})
 .withMessage('Username has to be between 6 and 15 characters')
 
+//Email Constant 
+const email = check('email').isEmail().withMessage('Please provide a valid email')
+
+//Phone number constant 
+const phone = check('phone')
+.isLength({min:10,max:11})
+.withMessage('Phone number has to be between 10 - 11 characters')
+
 //Checks if username exists constant 
 const usernameExists = check('username').custom(async (value) => {
     const {rows} = await db.query
@@ -46,6 +54,6 @@ const loginFieldsCheck = check('username').custom(async(value,{req}) =>{
 })
 
 module.exports = {
-    registerValidation:[username, password, usernameExists],
+    registerValidation:[username, password,email,phone, usernameExists],
     loginValidation:[loginFieldsCheck]
 }
