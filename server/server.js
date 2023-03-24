@@ -58,6 +58,7 @@ app.get("/api/v1/users/drivers", async (req, res) => {
         console.log(error)
     }
 })
+
 //get Customers
 app.get("/api/v1/users/customers", async (req, res) => { 
     try {
@@ -75,6 +76,43 @@ app.get("/api/v1/users/customers", async (req, res) => {
         console.log(error)
     }
 })
+//Get a specific Customer
+app.get("/api/v1/users/customers/:id", async (req,res) => {
+    try {
+        //results will consist of a particular user that has the same as the id provided
+        const results = await db.query("select * from users WHERE id = $1",
+        [req.params.id]);
+        console.log(results)
+    //Status code 200 means the Get request was a success
+    res.status(200).json({
+        status:"success",
+        data:{
+            user: results.rows[0]
+        },
+    });
+    } catch (error) {
+        console.log(error)
+    }
+})
+//Get a Specific User
+app.get("/api/v1/users/:id", async (req, res) => {
+    try {
+        //results will consist of a particular user that has the same as the id provided
+        const results = await db.query("select * from users WHERE id = $1",
+        [req.params.id]);
+        console.log(results)
+    //Status code 200 means the Get request was a success
+    res.status(200).json({
+        status:"success",
+        data:{
+            user: results.rows[0]
+        },
+    });
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 //get all the orders
 app.get("/api/v1/orders", async (req, res) => {
@@ -182,7 +220,42 @@ app.get("/api/v1/orders/unassigned", async (req,res) => {
         console.log(error)
     }
 })
-
+//Get the orders of a specific driver
+app.get("/api/v1/orders/driver/:id", async (req,res) =>{
+    try {
+        //results will consisit of all of the orders that are assigned to the specific driver
+        const results = await db.query("select * from orders where driver_id = $1",
+        [req.params.id]);
+        //Status code 200 means the Get request was a success
+        res.status(200).json({
+            status:"success",
+            results:results.rows.length,
+            data:{
+                orders: results.rows
+        },
+    })
+    } catch (error) {
+        console.log(error)
+    }
+})
+//Get the Orders of a Specific Customer
+app.get("/api/v1/orders/customer/:id" ,async (req,res) => {
+    try {
+        //results will consist of all of the orders that are ordered by the given customer
+        const results = await db.query("select * from orders where customer_id = $1", 
+        [req.params.id]);
+        //Status code 200 means the Get request was a success
+        res.status(200).json({
+            status:"success",
+            results:results.rows.length,
+            data:{
+                orders: results.rows
+        },
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
 //Create a new Order
 app.post("/api/v1/order/orders", async(req,res) => {
     console.log(req.body)

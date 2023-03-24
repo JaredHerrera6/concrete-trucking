@@ -4,8 +4,15 @@ import React, {useState, createContext} from "react";
 export const OrderContext = createContext();
 
 export const OrderContextProvider = (props) => {
+    //Order Context Arrays
     const [orders, setOrders] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null)
+
+    //Driver Context Arrays
+    
+    //Manager Context Arrays
+
+    
 
     const addOrders = (order) => {
         //... order adds the current orders that are currently saved in the order array

@@ -8,6 +8,8 @@ import About from "./routes/About";
 import Footer from "./components/Footer";
 import { OrderContextProvider } from "./context/OrderContext";
 import OrderDetailPage from "./routes/OrderDetailPage";
+import DriverDetailPage from "./routes/DriverDetailPage";
+import CustomerDetailPage from "./routes/CustomerDetailPage";
 function App() {
   return (
     <OrderContextProvider>
@@ -23,6 +25,11 @@ function App() {
                 <Route path="/users/drivers" element={<Drivers />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/orders/:id" element={<OrderDetailPage />} />
+                <Route path="/users/:id" element={<DriverDetailPage />} />
+                <Route
+                  path="/users/:customers/:id"
+                  element={<CustomerDetailPage />}
+                />
               </Routes>
             </main>
             <Footer className="mt-auto" />

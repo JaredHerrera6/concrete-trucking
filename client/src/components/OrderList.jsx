@@ -20,7 +20,7 @@ const OrderList = (props) => {
     fetchData();
   }, []);
 
-  //This Allows us to navigate to thge selected Order
+  //This Allows us to navigate to the selected Order
   const handleOrderSelect = (id) => {
     navigate(`/orders/${id}`);
   };

@@ -3,9 +3,10 @@ import Baseurl from "../apis/Baseurl";
 import { GrStatusInfo } from "react-icons/gr";
 import { FaEdit } from "react-icons/fa";
 import { FcViewDetails } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 function Drivers() {
   const [drivers, setDrivers] = useState(null);
-
+  let navigate = useNavigate();
   //UseEffect to fetch the list of drivers
   useEffect(() => {
     const fetchData = async () => {
@@ -20,6 +21,11 @@ function Drivers() {
     };
     fetchData();
   }, []);
+
+  //This Allows us to Navigate to the Selected Driver Page
+  const handleDriverSelect = (id) => {
+    navigate(`/users/${id}`);
+  };
   return (
     <div>
       <h1 className="text-center display-3">Drivers</h1>
@@ -71,7 +77,13 @@ function Drivers() {
                   <td>{driver.last_name.toUpperCase()}</td>
                   <td>{driver._role.toUpperCase()}</td>
                   <td>
-                    <button className="btn btn-primary ">View Driver</button>
+                    <button
+                      onClick={() => handleDriverSelect(driver.id)}
+                      key={driver.id}
+                      className="btn btn-primary "
+                    >
+                      View Driver
+                    </button>
                   </td>
                 </tr>
               );

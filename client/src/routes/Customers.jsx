@@ -3,9 +3,11 @@ import Baseurl from "../apis/Baseurl";
 import { MdCreateNewFolder } from "react-icons/md";
 import { GrView, GrUserNew } from "react-icons/gr";
 import { FaEdit } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Customers() {
   const [customers, setCustomers] = useState(null);
+  let navigate = useNavigate();
 
   //UseEffect to fetch the list of Customers
   useEffect(() => {
@@ -21,6 +23,11 @@ function Customers() {
     };
     fetchData();
   }, []);
+
+  //This Allows us to Navigate to the Selected Customer Page
+  const handleCustomerSelect = (id) => {
+    navigate(`/users/customers/${id}`);
+  };
   return (
     <div>
       <h1 className="text-center display-3">Customers</h1>
@@ -29,27 +36,27 @@ function Customers() {
       </h1>
       {/*List/Table to show the Responsabilites and roles of the CUstomers in our System*/}
       <ul className="list-group w-25">
-        <li class="list-group-item d-flex justify-content-between align-items-center bg-info">
+        <li className="list-group-item d-flex justify-content-between align-items-center bg-info">
           Insert a New Order as a Selected Customer
-          <span class="badge badge-info badge-pill">
+          <span className="badge badge-info badge-pill">
             <MdCreateNewFolder />
           </span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center bg-secondary text-white">
+        <li className="list-group-item d-flex justify-content-between align-items-center bg-secondary text-white">
           View Previous and Current Orders of selected Customer
-          <span class="badge badge-secondary badge-pill">
+          <span className="badge badge-secondary badge-pill">
             <GrView />
           </span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center bg-info">
+        <li className="list-group-item d-flex justify-content-between align-items-center bg-info">
           Edit Order(If not in Transit or Deivered)
-          <span class="badge badge-info badge-pill">
+          <span className="badge badge-info badge-pill">
             <FaEdit />
           </span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center bg-secondary text-white">
           Create new Customer
-          <span class="badge badge-secondary badge-pill">
+          <span className="badge badge-secondary badge-pill">
             <GrUserNew />
           </span>
         </li>
@@ -70,12 +77,18 @@ function Customers() {
           {customers &&
             customers.map((customer) => {
               return (
-                <tr>
+                <tr key={customer.id}>
                   <td>{customer.first_name.toUpperCase()}</td>
                   <td>{customer.last_name.toUpperCase()}</td>
                   <td>{customer._role.toUpperCase()}</td>
                   <td>
-                    <button className="btn btn-primary">View Customer</button>
+                    <button
+                      onClick={() => handleCustomerSelect(customer.id)}
+                      key={customer.id}
+                      className="btn btn-primary "
+                    >
+                      View Customer
+                    </button>
                   </td>
                 </tr>
               );
