@@ -256,6 +256,26 @@ app.get("/api/v1/orders/customer/:id" ,async (req,res) => {
         console.log(error)
     }
 })
+//Create a new Customer
+app.post("/api/v1/user/newcustomer", async(req,res) => {
+    try {
+        //returning * means to return the instance that you have just created, postgres does not return by default
+        //Can also return a single piece of info, * means all columns inserted. 
+        //Results will consist of all of then info of the new customer, and will insert the new customer into the database
+        const results = await db.query("INSERT INTO users (first_name,last_name,_role,username,password) values($1,$2,$3,$4,$5) returning *",
+        [req.body.first_name,req.body.last_name, req.body._role,req.body.username,req.body.password])
+        //Status code 201 means that the POST request and creation was a success
+        res.status(201).json({
+            status:"success",
+            //position [0] means the first instance of results.rows is going to be returned, which in this case is the customer that we just created
+            data :{
+                user : results.rows[0]
+            }
+        })
+    } catch (error) {
+       console.log(error) 
+    }
+})
 //Create a new Order
 app.post("/api/v1/order/orders", async(req,res) => {
     console.log(req.body)
@@ -263,9 +283,9 @@ app.post("/api/v1/order/orders", async(req,res) => {
         //returning * means to return the instance that you have just created, postgres does not return by default
         //Can also return a single piece of info, * means all columns inserted. 
         //Results will consist of all of then info of the new order, and will insert the new order into the database
-        const results = await db.query("INSERT INTO orders (customer_name,address,psi,stone,accelerator,retarder,yards,slump ,unload_method,special_in) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) returning *",
-        [req.body.customer_name, req.body.address,req.body.psi, req.body.stone, req.body.accelerator, req.body.retarder, req.body.yards, req.body.slump, req.body.unload_method,req.body.special_in])
-        //For clarity , consoloe.log the reuslts
+        const results = await db.query("INSERT INTO orders (customer_name,address,psi,stone,accelerator,retarder,yards,slump ,unload_method,special_in,customer_id) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) returning *",
+        [req.body.customer_name, req.body.address,req.body.psi, req.body.stone, req.body.accelerator, req.body.retarder, req.body.yards, req.body.slump, req.body.unload_method,req.body.special_in,req.body.customer_id])
+        //For clarity , console.log the reuslts
         console.log(results)
         //Status code 201 means that the POST request and creation was a success
         res.status(201).json({

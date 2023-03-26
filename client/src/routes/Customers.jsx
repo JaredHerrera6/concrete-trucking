@@ -28,6 +28,10 @@ function Customers() {
   const handleCustomerSelect = (id) => {
     navigate(`/users/customers/${id}`);
   };
+  //This allows us to navigate to the Add New Customer Page
+  const handleNewCustomerPage = () => {
+    navigate("/customer/newcustomer");
+  };
   return (
     <div>
       <h1 className="text-center display-3">Customers</h1>
@@ -96,7 +100,11 @@ function Customers() {
         </tbody>
       </table>
 
-      <button type="button" className="btn-lg btn-dark btn-outline-info">
+      <button
+        onClick={() => handleNewCustomerPage()}
+        type="button"
+        className="btn-lg btn-dark btn-outline-info"
+      >
         <GrUserNew />
         Create New Customer
       </button>

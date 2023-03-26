@@ -30,7 +30,7 @@ const OrderDetailPage = () => {
             <u>Order #{selectedOrder.order.id} Details</u>
           </h1>
           {/*LIst/Table to show the Details of the Chosen Order */}
-          <ul class="list-group w-25 pb-3">
+          <ul class="list-group w-50 pb-3">
             <li class="list-group-item d-flex justify-content-between align-items-center bg-info">
               Customer Name:
               <span class="badge  badge-pill">

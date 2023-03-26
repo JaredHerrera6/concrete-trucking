@@ -8,6 +8,7 @@ const CustomerDetailPage = () => {
   const { id } = useParams();
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const { orders, setOrders } = useContext(OrderContext);
+  const [name, setName] = useState(null);
   let navigate = useNavigate();
   //This use effect will fetch the customer with the given id
   useEffect(() => {
@@ -37,6 +38,10 @@ const CustomerDetailPage = () => {
   //This Allows us to navigate to the selected Order
   const handleOrderSelect = (id) => {
     navigate(`/orders/${id}`);
+  };
+  //This Allows us to Navigate to the New Order Form Page
+  const handleNewOrder = (id, firstname, lastname) => {
+    navigate(`/customer/newOrder/${id}/${firstname}/${lastname}`);
   };
   return (
     <div>
@@ -110,7 +115,17 @@ const CustomerDetailPage = () => {
         </tbody>
       </table>
 
-      <button type="button" className="btn-lg btn-dark btn-outline-info">
+      <button
+        onClick={() =>
+          handleNewOrder(
+            selectedCustomer.user.id,
+            selectedCustomer.user.first_name,
+            selectedCustomer.user.last_name
+          )
+        }
+        type="button"
+        className="btn-lg btn-dark btn-outline-info"
+      >
         <GrUserNew />
         Create New Order
       </button>
