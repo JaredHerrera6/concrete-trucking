@@ -3,7 +3,7 @@ import { FaFileInvoice } from "react-icons/fa";
 import { IoIosPersonAdd } from "react-icons/io";
 import { GrDocumentUpdate, GrView } from "react-icons/gr";
 import Baseurl from "../apis/Baseurl";
-import OrderList from "../components/OrderList";
+import ManagerOrderList from "../components/ManagerOrderList";
 import { useNavigate } from "react-router-dom";
 function Managers() {
   const [drivers, setDrivers] = useState(null);
@@ -93,7 +93,7 @@ function Managers() {
             })}
         </tbody>
       </table>
-      <OrderList />
+      <ManagerOrderList />
     </div>
   );
 }

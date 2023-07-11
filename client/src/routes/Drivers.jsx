@@ -75,7 +75,7 @@ function Drivers() {
                 <tr>
                   <td>{driver.first_name.toUpperCase()}</td>
                   <td>{driver.last_name.toUpperCase()}</td>
-                  <td>{driver._role.toUpperCase()}</td>
+                   <td>{driver._role.toUpperCase()}</td>
                   <td>
                     <button
                       onClick={() => handleDriverSelect(driver.id)}

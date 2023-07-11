@@ -38,6 +38,11 @@ const DriverDetailPage = () => {
   const handleOrderSelect = (id) => {
     navigate(`/orders/${id}`);
   };
+
+  //This allows us to Navigate to update the Status of the Selected Order
+  const handleOrderUpdateSelect = (id) => {
+    navigate(`/driver/updateStatus/${id}`);
+  };
   return (
     <div>
       <h1 className="display text-decoration-underline">
@@ -81,6 +86,7 @@ const DriverDetailPage = () => {
             <th scope="col">Status</th>
             <th scope="col">Driver</th>
             <th scope="col">Details</th>
+            <th scope="col">Updates</th>
           </tr>
         </thead>
         <tbody>
@@ -100,6 +106,15 @@ const DriverDetailPage = () => {
                       className="btn btn-primary "
                     >
                       View Order
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleOrderUpdateSelect(order.id)}
+                      key={order.id}
+                      className="btn btn-primary"
+                    >
+                      Update Status
                     </button>
                   </td>
                 </tr>

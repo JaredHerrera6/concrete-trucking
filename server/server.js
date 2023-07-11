@@ -343,7 +343,7 @@ app.put("/api/v1/order/driver/:id", async(req,res) => {
 })
 
 
-const port = process.env.PORT 
+const port = process.env.PORT || 3001
 app.listen(port, () => {
     console.log(`server is up and listening on port ${port}`)
 })

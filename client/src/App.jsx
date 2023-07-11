@@ -12,6 +12,8 @@ import DriverDetailPage from "./routes/DriverDetailPage";
 import CustomerDetailPage from "./routes/CustomerDetailPage";
 import NewOrder from "./routes/NewOrder";
 import NewCustomer from "./routes/NewCustomer";
+import DriverUpdate from "./routes/DriverUpdate";
+import StatusUpdate from "./routes/StatusUpdate";
 function App() {
   return (
     <OrderContextProvider>
@@ -33,11 +35,19 @@ function App() {
                   element={<CustomerDetailPage />}
                 />
                 <Route
+                  path="/manager/updateDriver/:id"
+                  element={<DriverUpdate />}
+                />
+                <Route
                   path="/customer/newOrder/:id/:firstname/:lastname"
                   element={<NewOrder />}
                 />
-                \
+
                 <Route path="/customer/newcustomer" element={<NewCustomer />} />
+                <Route
+                  path="/driver/updateStatus/:id"
+                  element={<StatusUpdate />}
+                />
               </Routes>
             </main>
             <Footer className="mt-auto" />
